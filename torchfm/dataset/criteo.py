@@ -46,7 +46,7 @@ class CriteoDataset(torch.utils.data.Dataset):
     def __getitem__(self, index):
         with self.env.begin(write=False) as txn:
             np_array = np.frombuffer(
-                txn.get(struct.pack('>I', index)), dtype=np.uint32).astype(dtype=np.long)
+                txn.get(struct.pack('>I', index)), dtype=np.uint32).astype(dtype=np.int64)
         return np_array[1:], np_array[0]
 
     def __len__(self):
